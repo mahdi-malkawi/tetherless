@@ -1,0 +1,7 @@
+{
+  "id": "health-001",
+  "type": "command",
+  "description": "Report host uptime and free disk — a safe, allow-listed command.",
+  "command": "uptime",
+  "args": []
+}

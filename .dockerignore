@@ -1,0 +1,8 @@
+.env
+.env.*
+data/
+bus/
+node_modules/
+.git/
+*.log
+*.pem

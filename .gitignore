@@ -1,0 +1,12 @@
+.env
+data/
+node_modules/
+*.log
+bus/
+
+# vendor signing keys — NEVER commit
+tetherless-private.pem
+tetherless-public.pem
+
+# Paid runners live in the private tetherless-pro package
+pro/
