@@ -21,7 +21,7 @@ const PAID_RUNNERS = ['browser', 'facebook'];
 const MUTATING_ACTIONS = ['click', 'type', 'submit', 'upload'];
 // Commands that act on the device (open things, take photos). Always need approval.
 // `am` starts Android activities, so every run of it needs approval too.
-const SENSITIVE_COMMANDS = new Set(['termux-open', 'termux-open-url', 'termux-camera-photo', 'am']);
+const SENSITIVE_COMMANDS = new Set(['termux-open', 'termux-open-url', 'termux-camera-photo', 'am', 'termux-sms-send', 'termux-telephony-call']);
 
 let bus; // set in main()
 let runners = { ...CORE_RUNNERS };
