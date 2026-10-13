@@ -1,12 +1,13 @@
 {
   "name": "tetherless",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Self-hosted, always-on automation agent you own, steered through a private Git repo.",
   "type": "module",
-  "bin": { "tetherless": "src/agent.js" },
+  "bin": { "tetherless": "src/cli.js" },
   "scripts": {
-    "start": "node src/agent.js",
-    "once": "node src/agent.js --once"
+    "setup": "node src/cli.js setup",
+    "start": "node src/cli.js",
+    "once": "node src/cli.js --once"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
