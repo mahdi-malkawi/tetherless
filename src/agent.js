@@ -19,6 +19,8 @@ const CORE_RUNNERS = { command: runCommand, http: runHttp };
 const PAID_RUNNERS = ['browser', 'facebook'];
 // Browser actions that change state on a site. These make a task need approval.
 const MUTATING_ACTIONS = ['click', 'type', 'submit', 'upload'];
+// Commands that act on the device (open things, take photos). Always need approval.
+const SENSITIVE_COMMANDS = new Set(['termux-open', 'termux-open-url', 'termux-camera-photo']);
 
 let bus; // set in main()
 let runners = { ...CORE_RUNNERS };
@@ -40,6 +42,8 @@ function bumpDailyUsage() {
  */
 function isSensitive(task) {
   if (task.sensitive === true) return true;
+  // Device actions always need approval, whatever the task says about itself.
+  if (task.type === 'command' && SENSITIVE_COMMANDS.has(task.command)) return true;
   if (task.type === 'browser') {
     return (task.steps || []).some((s) => MUTATING_ACTIONS.includes(s.action));
   }
