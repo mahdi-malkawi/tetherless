@@ -17,6 +17,7 @@ export async function runCommand(task, env) {
   const { stdout, stderr } = await exec(task.command, task.args || [], {
     timeout: (task.timeoutSec || 120) * 1000,
     maxBuffer: 8 * 1024 * 1024,
+    windowsHide: true, // no console window per command on Windows
   });
   return { stdout, stderr };
 }

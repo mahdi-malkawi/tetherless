@@ -72,6 +72,19 @@ async function handle(task, plan) {
     return;
   }
 
+  // Free trial over and no license: refuse every task with clear buying instructions.
+  if (plan.id === 'expired') {
+    bus.claim(task.file);
+    const contact = env.SUPPORT_CONTACT || 'github.com/mahdi-malkawi';
+    bus.complete(task.file, {
+      ok: false,
+      error: `Your free trial has ended. To keep using Tetherless, buy a license: contact ${contact} ` +
+             `and send this install ID: ${getInstallId()}`,
+    });
+    audit('plan_expired', { id: task.id });
+    return;
+  }
+
   if (!ID_RE.test(String(task.id || ''))) {
     bus.claim(task.file);
     bus.complete(task.file, { ok: false, error: 'task id must be 1-64 chars: letters, digits, _ or -' });
@@ -145,8 +158,8 @@ async function main() {
     return;
   }
 
-  if (!env.BUS_REPO) {
-    console.error('Set BUS_REPO in .env (your private bus repo). See .env.example.');
+  if (!env.BUS_REPO || /YOUR_USERNAME|your-user/i.test(env.BUS_REPO)) {
+    console.error('BUS_REPO is missing or still a placeholder. Run "npm run setup" to fix it.');
     process.exit(1);
   }
   bus = new Bus(env.BUS_REPO);

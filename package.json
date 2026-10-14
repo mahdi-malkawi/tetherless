@@ -6,8 +6,11 @@
   "bin": { "tetherless": "src/cli.js" },
   "scripts": {
     "setup": "node src/cli.js setup",
-    "start": "node src/cli.js",
-    "once": "node src/cli.js --once"
+    "start": "node src/cli.js start",
+    "stop": "node src/cli.js stop",
+    "status": "node src/cli.js status",
+    "run": "node src/cli.js run",
+    "once": "node src/cli.js run --once"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
